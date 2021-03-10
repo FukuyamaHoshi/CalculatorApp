@@ -11,5 +11,6 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-require('./hello_react')
+require('./buttons/MyButton')
+require('./containars/Container')
 require('./stylesheets/index')
