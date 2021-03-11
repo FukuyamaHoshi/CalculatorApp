@@ -8,6 +8,10 @@ function Container(params) {
     const [addValue, setAddvalue] = useState(0);
     const [minusFlg, setMinusflg] = useState(false);
     const [minusValue, setMinusvalue] = useState(0);
+    const [multiplyFlg, setMultiplyflg] = useState(false);
+    const [multiplyValue, setMultiplyvalue] = useState(0);
+    const [divisionFlg, setDivisionFlg] = useState(false);
+    const [divisionValue, setDivisionvalue] = useState(0);
 
      const doClickNumber = (event) => {
          let index = event.currentTarget.getAttribute('data-num');
@@ -28,6 +32,10 @@ function Container(params) {
          setAddvalue(0);
          setMinusvalue(0);
          setMinusflg(false);
+         setMultiplyvalue(0);
+         setMinusflg(false);
+         setDivisionvalue(0);
+         setDivisionFlg(false);
      }
 
      const plusClick = () => {
@@ -46,6 +54,14 @@ function Container(params) {
              let m = minusValue - Number(value);
              setValue(m);
              setMinusflg(false);
+         }else if (multiplyFlg == true){
+             let k = multiplyValue * Number(value);
+             setValue(k);
+             setMinusflg(false);
+         }else if (divisionFlg == true) {
+             let d = divisionValue / Number(value);
+             setValue(d);
+             setDivisionFlg(false);
          }
      }
 
@@ -61,6 +77,32 @@ function Container(params) {
              setValue(0);
          }
      }
+
+     const multiplyClick = () => {
+         if (multiplyFlg == false) {
+             let i = Number(value);
+             setMultiplyvalue(i);
+             setMultiplyflg(true);
+             setValue(0);
+         }else {
+             let i = Number(value);
+             setMultiplyvalue(multiplyValue * i);
+             setValue(0);
+         }
+     }
+
+     const divisionClick = () => {
+         if (divisionFlg == false) {
+             let i = Number(value);
+             setDivisionvalue(i);
+             setDivisionFlg(true);
+             setValue(0);
+         }else {
+             let i = Number(value);
+             setDivisionvalue(divisionValue / i);
+             setValue(0);
+         }
+     }
   
   return (
         <div id="squareBox">
@@ -70,13 +112,13 @@ function Container(params) {
             <MyButton doClick={clearClick}>C</MyButton>
             <MyButton>-/+</MyButton>
             <MyButton>%</MyButton>
-            <MyButton>÷</MyButton>
+            <MyButton doClick={divisionClick}>÷</MyButton>
             </div>
             <div id="secoudColumn">
             <MyButton doClick={doClickNumber}>7</MyButton>
             <MyButton doClick={doClickNumber}>8</MyButton>
             <MyButton doClick={doClickNumber}>9</MyButton>
-            <MyButton>×</MyButton>
+            <MyButton doClick={multiplyClick}>×</MyButton>
             </div>
             <div id="thirdColumn">
             <MyButton doClick={doClickNumber}>4</MyButton>
