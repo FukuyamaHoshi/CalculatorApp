@@ -18,7 +18,7 @@ function MyButton(params) {
     const classes = useStyles();
 
     return (
-        <Button variant="contained" className={classes.app}>
+        <Button variant="contained" className={classes.app} onClick={params.doClick} data-num={params.children}>
             {params.children}
         </Button>
     )

@@ -11,6 +11,4 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-require('./buttons/MyButton')
-require('./containars/Container')
 require('./stylesheets/index')
