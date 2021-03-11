@@ -6,6 +6,8 @@ function Container(params) {
     const [value, setValue] = useState(0);
     const [addFlg, setAddflg] = useState(false);
     const [addValue, setAddvalue] = useState(0);
+    const [minusFlg, setMinusflg] = useState(false);
+    const [minusValue, setMinusvalue] = useState(0);
 
      const doClickNumber = (event) => {
          let index = event.currentTarget.getAttribute('data-num');
@@ -24,6 +26,8 @@ function Container(params) {
          setValue(0);
          setAddflg(false);
          setAddvalue(0);
+         setMinusvalue(0);
+         setMinusflg(false);
      }
 
      const plusClick = () => {
@@ -35,8 +39,26 @@ function Container(params) {
 
      const totalClick = () => {
          if (addFlg == true) {
-             let i = addValue + Number(value);
-             setValue(i);
+             let a = addValue + Number(value);
+             setValue(a);
+             setAddflg(false);
+         }else if (minusFlg == true) {
+             let m = minusValue - Number(value);
+             setValue(m);
+             setMinusflg(false);
+         }
+     }
+
+     const minusClick = () => {
+         if (minusFlg == false) {
+            let i =  Number(value);
+            setMinusvalue(i);
+            setMinusflg(true);
+            setValue(0);
+         }else {
+             let m = Number(value);
+             setMinusvalue(minusValue - m);
+             setValue(0);
          }
      }
   
@@ -60,7 +82,7 @@ function Container(params) {
             <MyButton doClick={doClickNumber}>4</MyButton>
             <MyButton doClick={doClickNumber}>5</MyButton>
             <MyButton doClick={doClickNumber}>6</MyButton>
-            <MyButton>-</MyButton>
+            <MyButton doClick={minusClick}>-</MyButton>
             </div>
             <div id="fouthColumn">
             <MyButton doClick={doClickNumber}>1</MyButton>
