@@ -4,6 +4,8 @@ import MyButton from '../buttons/MyButton'
 function Container(params) {
 
     const [value, setValue] = useState(0);
+    const [addFlg, setAddflg] = useState(false);
+    const [addValue, setAddvalue] = useState(0);
 
      const doClickNumber = (event) => {
          let index = event.currentTarget.getAttribute('data-num');
@@ -20,6 +22,22 @@ function Container(params) {
 
      const clearClick = () => {
          setValue(0);
+         setAddflg(false);
+         setAddvalue(0);
+     }
+
+     const plusClick = () => {
+         let i = Number(value);
+         setAddvalue(addValue + i);
+         setAddflg(true);
+         setValue(0);
+     }
+
+     const totalClick = () => {
+         if (addFlg == true) {
+             let i = addValue + Number(value);
+             setValue(i);
+         }
      }
   
   return (
@@ -48,13 +66,13 @@ function Container(params) {
             <MyButton doClick={doClickNumber}>1</MyButton>
             <MyButton doClick={doClickNumber}>2</MyButton>
             <MyButton doClick={doClickNumber}>3</MyButton>
-            <MyButton>+</MyButton>
+            <MyButton doClick={plusClick}>+</MyButton>
             </div>
             <div id="fiveColumn">
             <MyButton doClick={doClickNumber}>0</MyButton>
             <MyButton doClick={doClickNumber}>00</MyButton>
             <MyButton>.</MyButton>
-            <MyButton>=</MyButton>
+            <MyButton doClick={totalClick}>=</MyButton>
             </div>
         </div>
   )
