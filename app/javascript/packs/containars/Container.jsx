@@ -5,6 +5,7 @@ function Container(params) {
 
     const [value, setValue] = useState(0);
     const [clickFlg, setClickflg] = useState(false);
+    const [numBnflg, setNumbnFlg] = useState(false);
     const [totalValue, setTotalvalue] = useState(0);
     const [addFlg, setAddflg] = useState(false);
     const [minusFlg, setMinusflg] = useState(false);
@@ -16,6 +17,7 @@ function Container(params) {
          let currentValue = "" + value + index;
          let leadNum = currentValue.slice(0,1);
          setClickflg(true);
+         setNumbnFlg(true);
 
          if (leadNum == 0) {
              let leadDeleteValue = currentValue.slice(1);
@@ -33,6 +35,7 @@ function Container(params) {
          setMultiplyflg(false);
          setDivisionFlg(false);
          setClickflg(false);
+         setNumbnFlg(false);
      }
 
      const plusClick = () => {
@@ -68,26 +71,30 @@ function Container(params) {
         }
 
         setAddflg(true);
+        setNumbnFlg(false);
      }
 
      const totalClick = () => {
-         if (addFlg == true) {
+         
+        if (addFlg) {
              let a = totalValue + Number(value);
              setValue(a);
              setAddflg(false);
-         }else if (minusFlg == true) {
+         }else if (minusFlg) {
              let m = totalValue - Number(value);
              setValue(m);
              setMinusflg(false);
-         }else if (multiplyFlg == true){
+         }else if (multiplyFlg){
              let k = totalValue * Number(value);
              setValue(k);
              setMinusflg(false);
-         }else if (divisionFlg == true) {
+         }else if (divisionFlg) {
              let d = totalValue / Number(value);
              setValue(d);
              setDivisionFlg(false);
          }
+
+         setNumbnFlg(true);
      }
 
      const minusClick = () => {
@@ -123,6 +130,7 @@ function Container(params) {
         }
         
         setMinusflg(true);
+        setNumbnFlg(false);
      }
 
      const multiplyClick = () => {
@@ -156,6 +164,7 @@ function Container(params) {
         }
 
         setMultiplyflg(true);
+        setNumbnFlg(false);
      }
          
 
@@ -189,6 +198,7 @@ function Container(params) {
         }
 
         setDivisionFlg(true);
+        setNumbnFlg(false);
      }
 
      const dodClick = () => { 
@@ -225,7 +235,7 @@ function Container(params) {
   return (
         <div id="squareBox">
             <p id="nameText">React Calculator</p>
-            <p id="indexValue">{value}</p>
+            <p id="indexValue">{numBnflg ? value : totalValue}</p>
             <div id="firstColumn">
             <MyButton doClick={clearClick} backgroundColor="#666666">{clickFlg ? "C" : "AC"}</MyButton>
             <MyButton doClick={togguleClick} backgroundColor="#666666">-/+</MyButton>
