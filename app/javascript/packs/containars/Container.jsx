@@ -4,6 +4,7 @@ import MyButton from '../buttons/MyButton'
 function Container(params) {
 
     const [value, setValue] = useState(0);
+    const [clickFlg, setClickflg] = useState(false);
     const [addFlg, setAddflg] = useState(false);
     const [addValue, setAddvalue] = useState(0);
     const [minusFlg, setMinusflg] = useState(false);
@@ -17,6 +18,7 @@ function Container(params) {
          let index = event.currentTarget.getAttribute('data-num');
          let currentValue = "" + value + index;
          let leadNum = currentValue.slice(0,1);
+         setClickflg(true);
 
          if (leadNum == 0) {
              let leadDeleteValue = currentValue.slice(1);
@@ -33,9 +35,10 @@ function Container(params) {
          setMinusvalue(0);
          setMinusflg(false);
          setMultiplyvalue(0);
-         setMinusflg(false);
+         setMultiplyflg(false);
          setDivisionvalue(0);
          setDivisionFlg(false);
+         setClickflg(false);
      }
 
      const plusClick = () => {
@@ -43,6 +46,7 @@ function Container(params) {
          setAddvalue(addValue + i);
          setAddflg(true);
          setValue(0);
+         setClickflg(true);
      }
 
      const totalClick = () => {
@@ -103,40 +107,71 @@ function Container(params) {
              setValue(0);
          }
      }
+
+     const dodClick = () => { 
+         let v = value;
+         let s = v.slice(0)
+         let index = s.indexOf('.');
+         
+         if (index == -1) {
+            let addDod = s + '.';
+            setValue(addDod);
+         }
+     }
+
+     const togguleClick = () => {
+         let v = value;
+         let s = v.slice(0);
+         let index = s.indexOf('-');
+
+         if (index == -1) {
+             let addMinus = '-' + s;
+             setValue(addMinus);
+         }else {
+             let deleteMinus = s.slice(1);
+             setValue(deleteMinus);
+         }
+     }
+
+     const percentClick = () => {
+         let v = value;
+         let p = v * 0.01;
+         setValue(p);
+     }
   
   return (
         <div id="squareBox">
             <p id="nameText">React Calculator</p>
             <p id="indexValue">{value}</p>
             <div id="firstColumn">
-            <MyButton doClick={clearClick}>C</MyButton>
-            <MyButton>-/+</MyButton>
-            <MyButton>%</MyButton>
-            <MyButton doClick={divisionClick}>÷</MyButton>
+            <MyButton doClick={clearClick} backgroundColor="#666666">{clickFlg ? "C" : "AC"}</MyButton>
+            <MyButton doClick={togguleClick} backgroundColor="#666666">-/+</MyButton>
+            <MyButton doClick={percentClick} backgroundColor="#666666">%</MyButton>
+            <MyButton doClick={divisionClick} backgroundColor="orange">÷</MyButton>
             </div>
             <div id="secoudColumn">
             <MyButton doClick={doClickNumber}>7</MyButton>
             <MyButton doClick={doClickNumber}>8</MyButton>
             <MyButton doClick={doClickNumber}>9</MyButton>
-            <MyButton doClick={multiplyClick}>×</MyButton>
+            <MyButton doClick={multiplyClick} backgroundColor="orange">×</MyButton>
             </div>
             <div id="thirdColumn">
             <MyButton doClick={doClickNumber}>4</MyButton>
             <MyButton doClick={doClickNumber}>5</MyButton>
             <MyButton doClick={doClickNumber}>6</MyButton>
-            <MyButton doClick={minusClick}>-</MyButton>
+            <MyButton doClick={minusClick} backgroundColor="orange">-</MyButton>
             </div>
             <div id="fouthColumn">
             <MyButton doClick={doClickNumber}>1</MyButton>
             <MyButton doClick={doClickNumber}>2</MyButton>
             <MyButton doClick={doClickNumber}>3</MyButton>
-            <MyButton doClick={plusClick}>+</MyButton>
+            <MyButton doClick={plusClick} backgroundColor="orange">+</MyButton>
             </div>
             <div id="fiveColumn">
             <MyButton doClick={doClickNumber}>0</MyButton>
             <MyButton doClick={doClickNumber}>00</MyButton>
-            <MyButton>.</MyButton>
-            <MyButton doClick={totalClick}>=</MyButton>
+            <MyButton doClick={dodClick}>.</MyButton>
+            <MyButton doClick={totalClick} backgroundColor="orange">=</MyButton>
             </div>
         </div>
   )

@@ -11,7 +11,10 @@ function MyButton(params) {
             margin: theme.spacing(1),
             width: "20%",
             height: "70px",
-            fontSize: "30px"
+            fontSize: "30px",
+            '&:hover': {
+                backgroundColor: "#00FFFF"
+            }
         }
     }))
     
