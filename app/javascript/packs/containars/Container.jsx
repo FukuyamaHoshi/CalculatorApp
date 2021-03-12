@@ -5,14 +5,11 @@ function Container(params) {
 
     const [value, setValue] = useState(0);
     const [clickFlg, setClickflg] = useState(false);
+    const [totalValue, setTotalvalue] = useState(0);
     const [addFlg, setAddflg] = useState(false);
-    const [addValue, setAddvalue] = useState(0);
     const [minusFlg, setMinusflg] = useState(false);
-    const [minusValue, setMinusvalue] = useState(0);
     const [multiplyFlg, setMultiplyflg] = useState(false);
-    const [multiplyValue, setMultiplyvalue] = useState(0);
     const [divisionFlg, setDivisionFlg] = useState(false);
-    const [divisionValue, setDivisionvalue] = useState(0);
 
      const doClickNumber = (event) => {
          let index = event.currentTarget.getAttribute('data-num');
@@ -30,82 +27,168 @@ function Container(params) {
 
      const clearClick = () => {
          setValue(0);
+         setTotalvalue(0);
          setAddflg(false);
-         setAddvalue(0);
-         setMinusvalue(0);
          setMinusflg(false);
-         setMultiplyvalue(0);
          setMultiplyflg(false);
-         setDivisionvalue(0);
          setDivisionFlg(false);
          setClickflg(false);
      }
 
      const plusClick = () => {
-         let i = Number(value);
-         setAddvalue(addValue + i);
-         setAddflg(true);
-         setValue(0);
-         setClickflg(true);
+
+        if (addFlg == false && minusFlg == false && multiplyFlg == false && divisionFlg == false) {
+            let i = Number(value);
+            let index = Number(totalValue) + i;
+            setTotalvalue(index);
+            setValue(0);
+        }else if (addFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) + i;
+            setTotalvalue(num);
+            setValue(0);
+        }else if (minusFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) - i;
+            setTotalvalue(num);
+            setValue(0);
+            setMinusflg(false);
+        }else if (multiplyFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) * i;
+            setTotalvalue(num);
+            setValue(0);
+            setMultiplyflg(false);
+        }else if (divisionFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) / i;
+            setTotalvalue(num);
+            setValue(0);
+            setDivisionFlg(false);
+        }
+
+        setAddflg(true);
      }
 
      const totalClick = () => {
          if (addFlg == true) {
-             let a = addValue + Number(value);
+             let a = totalValue + Number(value);
              setValue(a);
              setAddflg(false);
          }else if (minusFlg == true) {
-             let m = minusValue - Number(value);
+             let m = totalValue - Number(value);
              setValue(m);
              setMinusflg(false);
          }else if (multiplyFlg == true){
-             let k = multiplyValue * Number(value);
+             let k = totalValue * Number(value);
              setValue(k);
              setMinusflg(false);
          }else if (divisionFlg == true) {
-             let d = divisionValue / Number(value);
+             let d = totalValue / Number(value);
              setValue(d);
              setDivisionFlg(false);
          }
      }
 
      const minusClick = () => {
-         if (minusFlg == false) {
-            let i =  Number(value);
-            setMinusvalue(i);
-            setMinusflg(true);
+
+        if (addFlg == false && minusFlg == false && multiplyFlg == false && divisionFlg == false) {
+            let i = Number(value);
+            let index = Number(totalValue) + i;
+            setTotalvalue(index);
             setValue(0);
-         }else {
-             let m = Number(value);
-             setMinusvalue(minusValue - m);
-             setValue(0);
-         }
+        }else if (addFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) + i;
+            setTotalvalue(num);
+            setValue(0);
+            setAddflg(false);
+        }else if (minusFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) - i;
+            setTotalvalue(num);
+            setValue(0);
+        }else if (multiplyFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) * i;
+            setTotalvalue(num);
+            setValue(0);
+            setMultiplyflg(false);
+        }else if (divisionFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) / i;
+            setTotalvalue(num);
+            setValue(0);
+            setDivisionFlg(false);
+        }
+        
+        setMinusflg(true);
      }
 
      const multiplyClick = () => {
-         if (multiplyFlg == false) {
-             let i = Number(value);
-             setMultiplyvalue(i);
-             setMultiplyflg(true);
-             setValue(0);
-         }else {
-             let i = Number(value);
-             setMultiplyvalue(multiplyValue * i);
-             setValue(0);
-         }
+        if (addFlg == false && minusFlg == false && multiplyFlg == false && divisionFlg == false) {
+            let i = Number(value);
+            let index = Number(totalValue) + i;
+            setTotalvalue(index);
+            setValue(0);
+        }else if (addFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) + i;
+            setTotalvalue(num);
+            setValue(0);
+            setAddflg(false);
+        }else if (minusFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) - i;
+            setTotalvalue(num);
+            setValue(0);
+        }else if (multiplyFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) * i;
+            setTotalvalue(num);
+            setValue(0);
+        }else if (divisionFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) / i;
+            setTotalvalue(num);
+            setValue(0);
+            setDivisionFlg(false);
+        }
+
+        setMultiplyflg(true);
      }
+         
 
      const divisionClick = () => {
-         if (divisionFlg == false) {
-             let i = Number(value);
-             setDivisionvalue(i);
-             setDivisionFlg(true);
-             setValue(0);
-         }else {
-             let i = Number(value);
-             setDivisionvalue(divisionValue / i);
-             setValue(0);
-         }
+        if (addFlg == false && minusFlg == false && multiplyFlg == false && divisionFlg == false) {
+            let i = Number(value);
+            let index = Number(totalValue) + i;
+            setTotalvalue(index);
+            setValue(0);
+        }else if (addFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) + i;
+            setTotalvalue(num);
+            setValue(0);
+            setAddflg(false);
+        }else if (minusFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) - i;
+            setTotalvalue(num);
+            setValue(0);
+        }else if (multiplyFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) * i;
+            setTotalvalue(num);
+            setValue(0);
+        }else if (divisionFlg) {
+            let i = Number(value);
+            let num = Number(totalValue) / i;
+            setTotalvalue(num);
+            setValue(0);
+        }
+
+        setDivisionFlg(true);
      }
 
      const dodClick = () => { 
